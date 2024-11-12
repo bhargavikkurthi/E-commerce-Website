@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="cart-body">
+    <section class="cart-container">
+        <h1 id="cart-heading">Shopping Cart</h1>
+        <div class="cart-items-container">
+            
+        </div>
+        <div class="checkout-total">
+            <p id="cartTotal"></p>
+            <button>Checkout</button>
+
+        </div>
+
+    </section>
+
+    <script>
+
+        function initializeCart() {
+            const cartProducts = [
+                { id: 1, name: 'Laptop', price: 1200.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 2, name: 'Headphones', price: 150.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 3, name: 'Mouse', price: 25.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 4, name: 'Airpods', price: 120.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 5, name: 'Cable', price: 10.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 6, name: 'Keyboard', price: 50.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 7, name: 'Cable', price: 10.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" },
+                { id: 8, name: 'Keyboard', price: 50.00, quantity: 1, image: "https://via.placeholder.com/400x300?text=Premium+Leather+Bag" }];
+
+
+            localStorage.clear();
+            localStorage.setItem('products', JSON.stringify(cartProducts));
+        }
+
+        function loadCartItems() {
+            const cardContainer = document.querySelector(".cart-items-container");
+
+            let storedProducts = JSON.parse(localStorage.getItem('products')) || [];
+            if (storedProducts.length > 0) {
+                cardContainer.innerHTML = '';
+                storedProducts.forEach((product, index) => {
+                    const card = document.createElement('div');
+                    card.classList.add("productCard");
+
+                    card.innerHTML = `<div class="topPart">
+                            <img src="${product.image}" alt="${product.name}" srcset="">
+                            <h4 class="productName">${product.name}</h4>
+                            <p class="price">$${product.price.toFixed(2)}</p>
+                            </div>
+                            <div class="lowerPart">
+                            <input class="quantity-input" id="productQuantity" type="number" min="1" value="${product.quantity}">
+                            <button class="removebtn" type="submit">Remove</button>
+                            </div>`;
+                    cardContainer.appendChild(card);
+
+                    const inputField = card.querySelector(".quantity-input");
+                    const removebtn = card.querySelector(".removebtn");
+
+                    removebtn.addEventListener("click", () => {
+                        storedProducts.splice(index, 1);
+                        localStorage.setItem('products', JSON.stringify(storedProducts));
+                        loadCartItems();
+                    });
+
+                    inputField.addEventListener("input",(event)=>{
+                        product.quantity=parseInt(event.target.value);
+                        localStorage.setItem('products',JSON.stringify(storedProducts));
+                        calulateCartTotal();
+                    })
+
+
+                });
+            } else {
+                cardContainer.innerHTML = `<p>Your cart is Empty</p>`
+            }
+        }
+
+        function calulateCartTotal() {
+            const storedProducts = JSON.parse(localStorage.getItem('products'));
+            const cartTotal = document.querySelector("#cartTotal");
+            let total = 0;
+            storedProducts.forEach(item => {
+                total += (item.price * item.quantity);
+            });
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // initializeCart();
+            loadCartItems();
+            calulateCartTotal();
+        })
+        document.addEventListener("visibilitychange", () => {
+            loadCartItems();
+            calulateCartTotal();
+        })
+
+        // localStorage.clear()
+    </script>
+    <!-- <script src="products.js"></script> -->
+</body>
+
+</html>

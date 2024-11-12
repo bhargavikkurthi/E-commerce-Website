@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="form-body">
+    <div class="form-container form-shadow">
+        <div class="radio-group">
+            <input type="radio" class="radio-input" id="signin" name="tab" checked>
+            <label for="signin" class="form-label">Sign In</label>
+
+            <input type="radio" class="radio-input" id="signup" name="tab">
+            <label for="signup" class="form-label">Sign Up</label>
+
+
+            <div class="signInForm form-display">
+                <h2 class="form-heading">Sign In</h2>
+                <form class="form-container">
+                    <input class="input-fields" id="loginUsername" name="username" type="text" placeholder="Username" required>
+                    <input class="input-fields" id="loginPassword" name="password" type="password" placeholder="Password" required>
+                    <button type="submit" id="signinbtn" class="submitbtn">Submit</button>
+                </form>
+                <p>Don't have an account? <a href="">Sign Up Here</a></p>
+            </div>
+            <div class="signUpForm form-display">
+                <h2 class="form-heading">Sign Up</h2>
+                <form class="form-container">
+                    <input class="input-fields" id="username" type="text" placeholder="Username" name="username" required>
+                    <input class="input-fields" id="email" type="email" placeholder="Email" name="email" required>
+                    <input class="input-fields " id="password" type="password" placeholder="Password" name="password" required>
+                    <input class="input-fields " id="confirmpassword" type="password" placeholder="Confirm Password" name="confirmPass" required>
+                    <button type="submit" id="signupbtn" class="submitbtn">Submit</button>
+                </form>
+                <p>Already have an account? <a href="">Sign Up Here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signupbtn=document.querySelector("#signupbtn");
+        const signinbtn=document.querySelector("#signinbtn");
+        signupbtn.addEventListener("click",()=>{
+            let password=document.querySelector("#password").value;
+            let confirmPass=document.querySelector("#confirmpassword").value;
+            let username=document.querySelector("#username").value.trim();
+            let email=document.querySelector("#email").value.trim();
+
+            if(password==confirmPass){
+                localStorage.setItem(username,JSON.stringify({username:username,email:email,password:password}));
+            }else{
+                alert("Password does not match!");
+            }
+        });
+
+        signinbtn.addEventListener("click",()=>{
+            let username=document.querySelector("#loginUsername").value.trim();
+            let password=document.querySelector("#loginPassword").value;
+
+            const user=JSON.parse(localStorage.getItem(username));
+            if( user.username==username && user.password==password){
+                alert("Login succesfull");
+            }else{
+                alert("Username or password does not match");
+            }
+            
+        });
+
+        
+
+
+    </script>
+</body>
+
+</html>
