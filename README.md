@@ -9,12 +9,10 @@ An elegant and efficient e-commerce website designed to showcase a variety of pr
   - [Product Catalog](#product-catalog)
   - [Shopping Cart](#shopping-cart)
   - [Responsive Design](#responsive-design)
-- [File Structure](#file-structure)
 - [Functionalities](#functionalities)
   - [HTML Files](#html-files)
   - [CSS Files](#css-files)
 - [Technologies Used](#technologies-used)
-- [Installation](#installation)
 - [Usage](#usage)
 
 ---
@@ -42,17 +40,10 @@ This project is a fully functional e-commerce website designed to showcase a var
 ### Responsive Design
 The website is designed to be fully responsive, adjusting its layout based on screen size to ensure an optimal viewing experience on both desktop and mobile devices.
 
-## File Structure
-```bash
-/e-commerce-website
-├── index.html          # Main landing page
-├── signin-signup.html  # Sign in and sign up page
-├── styles.css          # CSS styles for the website
-└── images/             # Directory for product images (if applicable)
-```bash
 
 ## Functionalities
-HTML Files
+
+### HTML Files
 index.html
 Contains the main layout of the website including:
 
@@ -73,7 +64,7 @@ Sign In Form: Accepts username and password.
 
 Sign Up Form: Accepts username, email, password, and password confirmation.
 
-CSS Files
+### CSS Files
 styles.css
 Global Styles: Resets margins and paddings, sets a default font family, and applies box-sizing for better layout control.
 
@@ -94,16 +85,9 @@ JavaScript (for client-side functionality)
 
 Local Storage (for storing user data)
 
-##Installation
-Clone the repository:
-
-bash
-
-Copy
-git clone https://github.com/yourusername/e-commerce-website.git
+## Usage
 Open index.html in your web browser to view the website.
 
-## Usage
 Navigate through the website to explore products.
 
 Use the sign-in/sign-up feature to create an account or log in.
