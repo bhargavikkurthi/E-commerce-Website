@@ -43,7 +43,6 @@ This project is a fully functional e-commerce website designed to showcase a var
 The website is designed to be fully responsive, adjusting its layout based on screen size to ensure an optimal viewing experience on both desktop and mobile devices.
 
 ## File Structure
-```bash
 /e-commerce-website
 ├── index.html          # Main landing page
 ├── signin-signup.html  # Sign in and sign up page
